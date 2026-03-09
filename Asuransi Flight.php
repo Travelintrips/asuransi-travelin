@@ -142,6 +142,8 @@ function parseInflightData(raw) {
         kode: "",
         tanggal: ""
     };
+    
+    let route = '';
 
   
     if (raw.includes("M1")) {
@@ -213,6 +215,10 @@ function convertDDMMMYY(str) {
 }
 
 let lastScanId = null;
+let lastRawBarcode = null;
+let lastRoute = null;
+let lastDepartureCode = null;
+let lastArrivalCode = null;
 
 async function decodeBarcode() {
     if (!isDecoding) return;
@@ -223,13 +229,37 @@ async function decodeBarcode() {
         if (result) {
             stopCameraStream();
             let raw = result.text.trim();
+            
+            // 🔹 PARSE ROUTE
+    let route = '';
+    const routeMatch = raw.match(/Rute:\s*(.*)/i);
+
+    if(routeMatch){
+        route = routeMatch[1].trim();
+    }
+
+    // 🔹 PARSE AIRPORT CODES
+    let departureCode = '';
+    let arrivalCode = '';
+    const codeMatch = raw.match(/(\w{3})\s+\d{2}:\d{2}\s*-\s*(\w{3})\s+\d{2}:\d{2}/);
+
+    if(codeMatch){
+        departureCode = codeMatch[1];
+        arrivalCode = codeMatch[2];
+    }
 
             // Tampilkan hasil scan
             document.getElementById("scanResultBox").style.display = "block";
             document.getElementById("hasilRaw").innerText = raw;
 
-            // Simpan ke database
-            saveRawBarcode(raw);
+            // Tampilkan tombol Lanjutkan
+            document.getElementById("continueButtonWrapper").style.display = "block";
+
+            // Simpan raw barcode untuk digunakan saat tombol Lanjutkan diklik
+            lastRawBarcode = raw;
+            lastRoute = route;
+            lastDepartureCode = departureCode;
+            lastArrivalCode = arrivalCode;
         }
 
     } catch (err) {
@@ -237,11 +267,11 @@ async function decodeBarcode() {
     }
 }
 
-function saveRawBarcode(raw) {
+function saveRawBarcode(raw, route, departureCode, arrivalCode) {
     fetch("/wp-json/scan/v1/save", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ barcode: raw })
+        body: JSON.stringify({ barcode: raw, route: route, departure_code: departureCode, arrival_code: arrivalCode })
     })
     .then(res => res.json())
     .then(data => {
@@ -249,20 +279,22 @@ function saveRawBarcode(raw) {
 
         if (data.success) {
             lastScanId = data.id;
-
-            let topBtn = document.getElementById("topContinue");
-            topBtn.classList.add("active");
-            topBtn.style.pointerEvents = "auto";
-
-            topBtn.onclick = () => {
-                window.location.href = "/inflight-data/?scan_id=" + lastScanId;
-            };
+            // Redirect ke halaman data setelah berhasil simpan
+            window.location.href = "/inflight-data/?scan_id=" + lastScanId;
         }
     })
     .catch(err => {
         console.error("Save error:", err);
+        alert("❌ Gagal menyimpan data. Silakan coba lagi.");
     });
 }
+
+// Setup tombol Lanjutkan untuk memanggil saveRawBarcode
+document.getElementById("continueButton").onclick = () => {
+    if (lastRawBarcode) {
+        saveRawBarcode(lastRawBarcode, lastRoute, lastDepartureCode, lastArrivalCode);
+    }
+};
 
     // EVENT LISTENERS
     barcodeBox.onclick = (e) => {
@@ -325,14 +357,37 @@ function saveRawBarcode(raw) {
             let raw = result.text.trim();
 
             console.log("Barcode from image:", raw);
+            
+            // 🔹 PARSE ROUTE
+    let route = '';
+    const routeMatch = raw.match(/Rute:\s*(.*)/i);
+
+    if(routeMatch){
+        route = routeMatch[1].trim();
+    }
+
+    // 🔹 PARSE AIRPORT CODES
+    let departureCode = '';
+    let arrivalCode = '';
+    const codeMatch = raw.match(/(\w{3})\s+\d{2}:\d{2}\s*-\s*(\w{3})\s+\d{2}:\d{2}/);
+
+    if(codeMatch){
+        departureCode = codeMatch[1];
+        arrivalCode = codeMatch[2];
+    }
 
             // 🔥 Tampilkan hasil ke user
             document.getElementById("scanResultBox").style.display = "block";
             document.getElementById("hasilRaw").innerText = raw;
 
-            // 🔥 Simpan ke database
-            saveRawBarcode(raw);
+            // 🔥 Tampilkan tombol Lanjutkan
+            document.getElementById("continueButtonWrapper").style.display = "block";
 
+            // 🔥 Simpan raw barcode untuk digunakan saat tombol Lanjutkan diklik
+            lastRawBarcode = raw;
+            lastRoute = route;
+            lastDepartureCode = departureCode;
+            lastArrivalCode = arrivalCode;
         } catch (err) {
             alert("❌ Gambar tidak mengandung barcode yang valid");
         }
@@ -667,9 +722,6 @@ function saveRawBarcode(raw) {
     <!-- TOP BAR -->
     <div class="top-bar">
     <span class="back-arrow" onclick="window.location.href='https://travelintrips.co.id/';">&#8592;</span>
-    <span id="topContinue" style="opacity:0.3; pointer-events:none; cursor:not-allowed;">
-        Lanjutkan
-    </span>
 </div>
 
 
@@ -726,6 +778,23 @@ function saveRawBarcode(raw) {
 <div id="scanResultBox" style="margin-top:20px; padding:15px; background:white; border-radius:10px; display:none; border:1px solid #ddd;">
     <h3 style="margin-top:0;">Hasil Scan:</h3>
     <p id="hasilRaw" style="font-weight:bold; color:#333;"></p>
+</div>
+
+<!-- TOMBOL LANJUTKAN (HIDDEN BY DEFAULT) -->
+<div id="continueButtonWrapper" style="display:none; text-align:center; margin-top:20px;">
+    <button id="continueButton" style="
+        padding: 12px 40px;
+        background: #00bcd4;
+        color: white;
+        border: 2px solid #0097a7;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    ">
+        Lanjutkan
+    </button>
 </div>
 
 

@@ -14,15 +14,41 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function goToStep3() {
+    // Validasi form - pastikan semua field terisi
+    const namaPeserta = document.getElementById("namaPeserta").value.trim();
+    const kodePenerbangan = document.getElementById("kodePenerbangan").value.trim();
+    const tanggalPenerbangan = document.getElementById("tanggalPenerbangan").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const teleponPeserta = document.getElementById("teleponPeserta").value.trim();
+    const namaAnggota = document.getElementById("namaAnggota").value.trim();
+    const teleponAnggota = document.getElementById("teleponAnggota").value.trim();
+
+    // Cek field yang kosong
+    const emptyFields = [];
+    if (!namaPeserta) emptyFields.push("Nama Peserta");
+    if (!kodePenerbangan) emptyFields.push("Kode Penerbangan");
+    if (!tanggalPenerbangan) emptyFields.push("Tanggal Penerbangan");
+    if (!email) emptyFields.push("Email");
+    if (!teleponPeserta) emptyFields.push("Nomor Telepon Peserta");
+    if (!namaAnggota) emptyFields.push("Nama Anggota Keluarga");
+    if (!teleponAnggota) emptyFields.push("Nomor Telepon Anggota Keluarga");
+
+    // Jika ada field kosong, tampilkan peringatan
+    if (emptyFields.length > 0) {
+        alert("Mohon lengkapi data berikut:\n\n• " + emptyFields.join("\n• "));
+        return;
+    }
+
+    // Jika semua terisi, lanjutkan submit
     const payload = {
         scan_id: scan_id,
-        namaPeserta: document.getElementById("namaPeserta").value.trim(),
-        kodePenerbangan: document.getElementById("kodePenerbangan").value.trim(),
-        tanggalPenerbangan: document.getElementById("tanggalPenerbangan").value.trim(),
-        teleponPeserta: document.getElementById("teleponPeserta").value.trim(),
-        namaAnggota: document.getElementById("namaAnggota").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        teleponAnggota: document.getElementById("teleponAnggota").value.trim()
+        namaPeserta: namaPeserta,
+        kodePenerbangan: kodePenerbangan,
+        tanggalPenerbangan: tanggalPenerbangan,
+        teleponPeserta: teleponPeserta,
+        namaAnggota: namaAnggota,
+        email: email,
+        teleponAnggota: teleponAnggota
     };
 
     fetch("/wp-json/scan/v1/insert-details", {
@@ -46,6 +72,8 @@ function showCustomDialog() {
         <div class="modal-overlay">
             <div class="modal-box">
                 <p class="modal-text">Isi data penumpang lain?</p>
+                <p class="modal-sub">Ya untuk isi data lainnya</p>
+<p class="modal-sub">Lanjutkan untuk halaman berikutnya</p>
                 <div class="modal-buttons">
                     <button class="btn-ya" onclick="resetForm()">Ya</button>
                     <button class="btn-lanjut" onclick="goToNextStep()">Lanjut</button>
@@ -235,6 +263,15 @@ input:focus {
   width: 90%;
 }
 
+.modal-sub {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #4a4a4a;
+    text-align: center;
+    line-height: 1.4;
+}
+
+
 .modal-text {
   font-size: 16px;
   font-weight: 600;
@@ -246,6 +283,7 @@ input:focus {
   display: flex;
   gap: 12px;
   justify-content: center;
+  padding-top: 20px;
 }
 
 .btn-ya, .btn-lanjut {
@@ -329,6 +367,10 @@ input:focus {
 
     <label class="label-small">Nomor Telepon Anggota Keluarga</label>
     <input type="text" id="teleponAnggota">
+    
+    <div style="margin-top:10px; padding:10px; background:#fff3cd; border:1px solid #ffeeba; color:#856404; border-radius:4px;">
+        <strong>Note:</strong> Email penerima notifikasi pembayaran adalah email penumpang yang didaftarkan pertama kali.
+      </div>
 
     <div style="text-align:right; margin-top:10px;">
       <button class="submit-btn" onclick="goToStep3()">Submit</button>

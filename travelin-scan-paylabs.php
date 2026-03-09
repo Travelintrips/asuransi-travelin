@@ -1181,92 +1181,84 @@ $price = wc_price($order->get_total());
 $price = wc_price($order->get_total());
 
     $html = '
-    <div style="background-color:#00a1b3;color:white;padding:15px 20px;">
-        <table width="100%">
-            <tr>
-                <td width="70%">
-                    <span style="font-size:18px;font-weight:bold;">
-                        SERTIFIKAT ASURANSI<br/>INSURANCE CERTIFICATE
-                    </span>
-                </td>
-                <td width="30%" align="right">
-                    <span style="font-size:20px;font-weight:bold;">
-                        CHUBB<sup style="font-size:10px;">®</sup>
-                    </span>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="height:100%;">
+        <tr>
+            <td width="22%" style="background-color:#00a1b3; padding:20px 14px; vertical-align:bottom;">
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <span style="font-size:16px; font-weight:bold; color:#ffffff; letter-spacing:0.15em;">CHUBB<sup style="font-size:10px;">&#174;</sup></span>
+            </td>
+            <td width="78%" style="background-color:#ffffff; padding:0; vertical-align:top;">
 
-    <div style="background-color:#ffffff;padding:25px;">
+                <div style="background-color:#00a1b3; color:#ffffff; padding:14px 20px; margin-bottom:0px; margin-top:0px;">
+                    <span style="font-size:17px; font-weight:bold; letter-spacing:0.04em;">SERTIFIKAT ASURANSI</span><br/>
+                    <span style="font-size:14px; font-style:italic; font-weight:bold; letter-spacing:0.04em;">INSURANCE CERTIFICATE</span>
+                </div>
 
-        <span style="font-size:15px;"><b>Nama / Name :</b> ' . esc_html($passenger['nama']) . '</span>
-        <br><br>
+                <div style="padding:0 20px 20px 20px; margin-top:14px;">
 
-        <span style="font-size:7px;">
-        PT Chubb Syariah Insurance Indonesia (selanjutnya disebut “Perusahaan”) selaku Operator 
-        selaku pengelola, dengan ini memberikan manfaat asuransi kepada Peserta yang Namanya tersebut 
-        dalam sertifikat asuransi, sesuai syarat-syarat, kondisi-kondisi serta pengecualian 
-        sebagaimana Polis Induk Chubb Syariah Personal Accident Inflight No (' . esc_html($invoice) . ').
-        </span>
+                    <p style="font-size:11px; font-weight:bold; margin-bottom:12px;">
+                        CHUBB SYARIAH PERSONAL ACCIDENT INFLIGHT
+                    </p>
 
-        <br><br>
+                    <p style="font-size:13px; font-weight:bold; margin-bottom:10px;">
+                        Nama/<u>Name</u> :&nbsp;&nbsp;' . esc_html($passenger['nama']) . '
+                    </p>
 
-        <table border="1" cellpadding="6" width="100%">
-            <tr>
-                <td width="45%">Nomor Sertifikat</td>
-                <td width="55%">' . $certificate_number . '</td>
-            </tr>
-            <tr>
-                <td>Total Kontribusi yang dibayar</td>
-                <td>' . $price . '</td>
-            </tr>
-            <tr>
-                <td>Periode Perjalanan / Code Flight</td>
-                <td>' . $flight_date . ' / ' . $flight_code . '</td>
-            </tr>
-            <tr>
-                <td>Rencana perjalanan yang dipilih</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Tujuan / Destination</td>
-                <td>' . $destination . '</td>
-            </tr>
-        </table>
+                    <p style="font-size:7px; margin-bottom:12px; line-height:1.6;">
+                        PT Chubb Syariah Insurance Indonesia (selanjutnya disebut &#x201C; Perusahaan&#x201D;) selaku Operator selaku pengelola, dengan ini
+                        memberikan manfaat asuransi&nbsp; kepada Peserta yang&nbsp; Namanya&nbsp; tersebut
+                        dalam sertifikat asuransi,&nbsp; sesuai syarat -syarat,
+                        kondisi-kondisi serta pengecualian sebagaimana <b>Polis Induk Chubb Syariah Personal Accident Inflight No (' . esc_html($invoice) . ').</b>
+                    </p>
 
-        <br><br>
+                    <table border="1" cellpadding="7" cellspacing="0" width="100%" style="border-collapse:collapse; font-size:9px; margin-bottom:12px;">
+                        <tr>
+                            <td width="46%" style="font-weight:bold;">Nomor Sertifikat</td>
+                            <td width="54%">' . $certificate_number . '</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">Total Kontribusi yang dibayar</td>
+                            <td>' . strip_tags($price) . '</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">Periode Perjalanan/Kode<br/>Penerbangan/Code Flight</td>
+                            <td>' . $flight_date . ' / ' . $flight_code . '</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">Rencana perjalanan Yang dipilih</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">Tujuan/<u>Destination</u></td>
+                            <td>' . $destination . '</td>
+                        </tr>
+                    </table>
 
-        <span style="font-size:9px;">
-        Customer Service Hotline No : 9999-9999 (24 Jam / 7 hari) 
-        Email : info@chubb.com
-        </span>
+                    <p style="font-size:8px; margin-bottom:6px;">
+                        Customer <u>Service&nbsp; Hotline No :</u> 9999-9999 (24 Jam / 7 hari) <u>Email :</u>&nbsp; <u>..@Chubb.com</u>
+                        &nbsp;&nbsp;<span style="border:1px solid #000; padding:1px 5px;">&nbsp;&nbsp;&nbsp;</span>
+                    </p>
 
-        <br><br>
+                    <p style="font-size:8px; margin-bottom:14px;">
+                        Emergency Contact/<u>Kontak Darurat</u>____:&nbsp;&nbsp;&nbsp;&nbsp;..........
+                    </p>
 
-        <span style="font-size:9px;">
-        Emergency Contact / Kontak Darurat : ....................
-        </span>
+                    <p style="font-size:7px; color:#000000; margin-bottom:18px; line-height:1.6; font-weight:bold;">
+                        Demikianlah Perusahaan telah menandatangani Polis Ini yang berlaku selama&nbsp; Periode Pertanggungan sebagaimana
+                        ternyata dalam sertifikat asuransi namun dengan ketentuan bahwa polis ini tidak akan&nbsp;mengikat bagi perusahaan
+                        kecuali telah ditandatangani&nbsp;oleh pejabat&nbsp;yang berwenang dari perusahaa
+                    </p>
 
-        <br><br><br>
+                    <p style="font-size:10px; margin-bottom:16px;">Name</p>
 
-        <span style="font-size:7px;">
-        Demikianlah Perusahaan telah menandatangani Polis Ini yang berlaku selama 
-        Periode Pertanggungan sebagaimana ternyata dalam sertifikat asuransi namun 
-        dengan ketentuan bahwa polis ini tidak akan mengikat bagi perusahaan kecuali 
-        telah ditandatangani oleh pejabat yang berwenang dari perusahaan.
-        </span>
+                    <p style="font-size:9px; margin-bottom:2px;">________________________________</p>
+                    <p style="font-size:9px; font-weight:bold; margin-bottom:2px;">Authorised Signature</p>
+                    <p style="font-size:9px; font-weight:bold;">Chubb Syariah Insurance Indonesia</p>
 
-        <br><br><br>
-
-        Name
-        <br><br>
-        _______________________________
-        <br>
-        Authorised Signature<br>
-        Chubb Syariah Insurance Indonesia
-
-    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
     ';
 
     $pdf->writeHTML($html, true, false, true, false, '');

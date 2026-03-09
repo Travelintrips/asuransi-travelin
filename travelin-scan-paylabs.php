@@ -1191,14 +1191,14 @@ $price = wc_price($order->get_total());
                     </td></tr>
                 </table>
             </td>
-            <td width="78%" style="background-color:#ffffff; padding:0; vertical-align:top;">
+            <td width="78%" style="background-color:#00a1b3; padding:0; vertical-align:top;">
 
-                <div style="background-color:#00a1b3; color:#ffffff; padding:14px 20px; margin-bottom:0px; margin-top:0px;">
+                <div style="background-color:#00a1b3; color:#ffffff; padding:14px 20px 10px 20px; margin:0;">
                     <span style="font-size:17px; font-weight:bold; letter-spacing:0.04em;">SERTIFIKAT ASURANSI</span><br/>
                     <span style="font-size:14px; font-style:italic; font-weight:bold; letter-spacing:0.04em;">INSURANCE CERTIFICATE</span>
                 </div>
 
-                <div style="padding:14px 20px 20px 20px; margin-top:0;">
+                <div style="background-color:#ffffff; padding:14px 20px 0px 20px; margin:0;">
 
                     <p style="font-size:11px; font-weight:bold; margin-bottom:12px;">
                         CHUBB SYARIAH PERSONAL ACCIDENT INFLIGHT
@@ -1257,9 +1257,12 @@ $price = wc_price($order->get_total());
 
                     <p style="font-size:9px; margin-bottom:2px;">________________________________</p>
                     <p style="font-size:9px; font-weight:bold; margin-bottom:2px;">Authorised Signature</p>
-                    <p style="font-size:9px; font-weight:bold;">Chubb Syariah Insurance Indonesia</p>
+                    <p style="font-size:9px; font-weight:bold; margin-bottom:0;">Chubb Syariah Insurance Indonesia</p>
 
                 </div>
+
+                <div style="background-color:#00a1b3; padding:20px 20px; margin:0;">&nbsp;</div>
+
             </td>
         </tr>
     </table>

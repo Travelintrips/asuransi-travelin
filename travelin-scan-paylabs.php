@@ -1181,11 +1181,15 @@ $price = wc_price($order->get_total());
 $price = wc_price($order->get_total());
 
     $html = '
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="height:100%;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="height:100%; border-collapse:collapse; min-height:100%;">
         <tr>
-            <td width="22%" style="background-color:#00a1b3; padding:20px 14px; vertical-align:bottom;">
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                <span style="font-size:16px; font-weight:bold; color:#ffffff; letter-spacing:0.15em;">CHUBB<sup style="font-size:10px;">&#174;</sup></span>
+            <td width="22%" style="background-color:#00a1b3; padding:0; vertical-align:top;">
+                <table width="100%" height="100%" cellpadding="0" cellspacing="0" border="0" style="height:100%; min-height:100%;">
+                    <tr><td style="background-color:#00a1b3; height:52px; padding:0;">&nbsp;</td></tr>
+                    <tr style="height:100%;"><td style="background-color:#00a1b3; padding:0 14px 20px 14px; vertical-align:bottom;">
+                        <span style="font-size:16px; font-weight:bold; color:#ffffff; letter-spacing:0.15em;">CHUBB<sup style="font-size:10px;">&#174;</sup></span>
+                    </td></tr>
+                </table>
             </td>
             <td width="78%" style="background-color:#ffffff; padding:0; vertical-align:top;">
 
@@ -1194,7 +1198,7 @@ $price = wc_price($order->get_total());
                     <span style="font-size:14px; font-style:italic; font-weight:bold; letter-spacing:0.04em;">INSURANCE CERTIFICATE</span>
                 </div>
 
-                <div style="padding:0 20px 20px 20px; margin-top:14px;">
+                <div style="padding:14px 20px 20px 20px; margin-top:0;">
 
                     <p style="font-size:11px; font-weight:bold; margin-bottom:12px;">
                         CHUBB SYARIAH PERSONAL ACCIDENT INFLIGHT

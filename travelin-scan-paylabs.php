@@ -575,7 +575,6 @@ function travelin_paylabs_callback_handler(WP_REST_Request $request) {
     // === Ambil Public Key dari PAYLABS ===
     $publicKey = <<<KEY
 -----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAga8DzhkgkaOADnKjzwPQ1MvWiUhLwdWxMv/hZYmLZFDtFwMpN4mUGw9UcQnsMRmnJ8SU7PCW7i75A3yhxrHL0xvw5sF66WUDLQFgoApsrXq4RGzWWINttThvDipSRqwBQSX5RqBAYSLnem3/4zO/8cf/6VXgPw0x0fc6cLSWMuNt/ViI6npVAFwwNRzIoPI8gXlhcmGqE8fzQsF6sf4L6xs7LgwgQ6kBo6+HsTvhouCWrSVw5cAFa7RaeQB7SlMn9Yehe1eCkzESzale6plNoeiR/EYBVCrQ0FIRCkiOLgxFtYp7Zu5obKsmWvYsupVfCdqq8cqhdNRovbxMAPhoYwIDAQAB
 -----END PUBLIC KEY-----
 KEY;
 
@@ -1254,3 +1253,4 @@ function attach_sertifikat_asuransi($attachments, $email_id, $order, $email) {
     return $attachments;
 
 }
+

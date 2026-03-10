@@ -1149,12 +1149,12 @@ $price = wc_price($order->get_total());
 
                 <div style="background-color:#ffffff; padding:14px 20px 0px 20px; margin:0;">
 
-                    <p style="font-size:11px; font-weight:bold; margin-bottom:12px;">
+                    <p style="font-size:11px; font-weight:600; margin-bottom:12px;">
                         CHUBB SYARIAH PERSONAL ACCIDENT INFLIGHT
                     </p>
 
                     <p style="font-size:13px; font-weight:bold; margin-bottom:10px;">
-                        Nama/<u>Name</u> :&nbsp;&nbsp;' . esc_html($passenger['nama']) . '
+                        Nama/Name :&nbsp;&nbsp;' . esc_html($passenger['nama']) . '
                     </p>
 
                     <p style="font-size:7px; margin-bottom:12px; line-height:1.6;">
@@ -1182,7 +1182,7 @@ $price = wc_price($order->get_total());
                             <td></td>
                         </tr>
                         <tr>
-                            <td style="font-weight:bold;">Tujuan/<u>Destination</u></td>
+                            <td style="font-weight:bold;">Tujuan/Destination</td>
                             <td>' . $destination . '</td>
                         </tr>
                     </table>
@@ -1203,10 +1203,11 @@ $price = wc_price($order->get_total());
                     </p>
 
                     <p style="font-size:10px; margin-bottom:16px;">Name</p>
-
                     <p style="font-size:9px; margin-bottom:2px;">________________________________</p>
-                    <p style="font-size:9px; font-weight:bold; margin-bottom:2px;">Authorised Signature</p>
-                    <p style="font-size:9px; font-weight:bold; margin-bottom:0;">Chubb Syariah Insurance Indonesia</p>
+                    <p style="font-size:9px; font-weight:600; margin:0; line-height:1.1;">
+    Authorised Signature<br>
+    Chubb Syariah Insurance Indonesia
+</p>
 
                 </div>
 
@@ -1253,4 +1254,5 @@ function attach_sertifikat_asuransi($attachments, $email_id, $order, $email) {
     return $attachments;
 
 }
+
 

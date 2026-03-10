@@ -640,7 +640,6 @@ KEY;
     // SIGN response
     $privateKey = <<<KEY
 -----BEGIN RSA PRIVATE KEY-----
-
 -----END RSA PRIVATE KEY-----
 KEY;
 
@@ -1254,4 +1253,5 @@ function attach_sertifikat_asuransi($attachments, $email_id, $order, $email) {
     return $attachments;
 
 }
+
 

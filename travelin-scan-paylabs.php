@@ -1223,7 +1223,6 @@ $price = wc_price($order->get_total());
 
     return $file_path;
 }
-
 add_filter('woocommerce_email_attachments', 'attach_sertifikat_asuransi', 10, 4);
 
 function attach_sertifikat_asuransi($attachments, $email_id, $order, $email) {
